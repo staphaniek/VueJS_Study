@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2018 by anonymous (http://jsbin.com/yeqoteqazi/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+<style id="jsbin-css">
+[v-cloak] {
+  display : none;
+}
+</style>
+</head>
+<body>
+  
+  <div id="app4">
+    <h1> 카운터 : {{ counter }} </h1>
+    <!-- v-on:이벤트이름="메소드이름" -->
+    <!-- v-on: 을 @로 대체 가능 -->
+    <h2>
+      <button v-on:click="increment">증가</button>
+      <button v-on:click="decrement">감소</button>
+    </h2>
+    <h2>
+      <button @click="increment">증가</button>
+      <button @click="decrement">감소</button>
+    </h2>
+  </div>
+  
+  <div id="app3" v-cloak v-show="show">
+    <h1>Hello 
+      <span v-text="name"></span>
+    </h1>
+    <input type="text" v-model="name" />
+    
+    <h3><input type="checkbox" v-model="smile"/>웃어요</h3>
+    <h2><img width = 300, :src="smile ? feelsgood : feelsbad"/></h2>
+    
+  </div>
+  
+  <div id="app2" v-cloak v-show="show">
+    <h2> 오늘 할 일</h2>
+    <ul>
+      <li v-for="todo in todos">{{ todo.text }} </li>
+    </ul>
+    
+    <h2> 오늘 할 일 (index ver.) </h2>
+    <ul>
+      <li v-for="(todo,index) in todos">{{index+1}} : {{ todo.text }} </li>
+    </ul>
+  </div>
+  
+  <div id="app" v-cloak v-show="show">
+    <h2>
+      <img width = 50, v-bind:src="feelsgood"/>
+      <!-- v-bind는 생략 가능 -->
+      <img width = 50, :src="feelsgood"/>
+    </h2>
+    <h2><img width = 50, :src="smile ? feelsgood : feelsbad"/></h2>
+    <h2> {{ Date() }}</h2>
+    <h1>Hello 
+      <span v-text="name"></span>
+    </h1>
+    <h1>Hello 
+      <span v-html="name" v-show="show"></span>
+    </h1>
+    <h1 v-once v-if="value > 5 && value < 10">value 가 5보다 크군요</h1>
+    <h1 v-else-if="value==5">value가 5이군요</h1>
+    <h1 v-else-if="value==10">value가 10이군요</h1>
+    <h1 v-else>value가 5보다 작거나 10보다 크군요</h1>
+    <h2 v-once> 초기값 : {{value}} </h2>
+    <h2> 현재값 : {{value}} </h2>
+    <h1 v-pre>{{ v-pre를 사용하면 그냥 랜더링 됨 }}</h1>
+  </div>
+  
+  <!-- 중간에 바뀐 값을 고정시키고 싶으면 어떻게 해아하는지...? -->
+  
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script id="jsbin-javascript">
+// 새로운 뷰를 정의합니다.
+var app4 = new Vue({
+  el: '#app4',// 어떤 엘리먼트에 적용을 할 지 정합니다
+  // data 는 해당 뷰에서 사용할 정보를 지닙니다
+  data: {
+    counter : 0
+  },
+  // app4 뷰 인스턴스를 위한 메소드들
+  methods: {
+    increment: function() {
+      // 인스턴스 내부의 데이터모델에 접근 할 땐,
+      // this 를 사용한다
+      this.counter++;
+    },
+    decrement: function() {
+      this.counter--;
+    }
+  }
+});
+
+// 새로운 뷰를 정의합니다
+var app = new Vue({
+  el: '#app', // 어떤 엘리먼트에 적용을 할 지 정합니다
+  // data 는 해당 뷰에서 사용할 정보를 지닙니다
+  data: {
+    name: '<i>italic<i>',
+    show : false,
+    value : 0,
+    smile : true,
+    feelsgood: 'https://ih0.redbubble.net/image.273660285.1820/flat,800x800,075,f.u2.jpg',
+    feelsbad: 'https://ih1.redbubble.net/image.518981749.8219/flat,800x800,075,f.jpg'
+  }
+  
+});
+
+// 새로운 뷰를 정의합니다
+var app2 = new Vue({
+  el: '#app2', // 어떤 엘리먼트에 적용을 할 지 정합니다
+  // data 는 해당 뷰에서 사용할 정보를 지닙니다
+  data: {
+    show:false,
+    todos: [
+      { text: 'Vue.js 튜토리얼 작성하기' },
+      { text: 'Webpack2 알아보기' },
+      { text: '사이드 프로젝트 진행하기' }
+    ]
+  }
+  
+});
+
+var app3 = new Vue({
+  el: '#app3', // 어떤 엘리먼트에 적용을 할 지 정합니다
+  // data 는 해당 뷰에서 사용할 정보를 지닙니다
+  data: {
+    name: 'Vue',
+    show: false,
+    smile : false,
+    feelsgood: 'https://ih0.redbubble.net/image.273660285.1820/flat,800x800,075,f.u2.jpg',
+    feelsbad: 'https://ih1.redbubble.net/image.518981749.8219/flat,800x800,075,f.jpg'
+  }
+  
+});
+</script>
+</body>
+</html>
