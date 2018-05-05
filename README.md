@@ -1,2 +1,4 @@
 # VueJS_Study
-Vuejs
+[Vuejs]
+
+2018 spring semester KWEB Vue.js Study
